@@ -663,9 +663,8 @@ shiftl_w64 :: Word64 -> Int -> Word64
 shiftl_w16 (W16# w) (I# i) = W16# (w `uncheckedShiftL#`   i)
 shiftl_w32 (W32# w) (I# i) = W32# (w `uncheckedShiftL#`   i)
 
-#if WORD_SIZE_IN_BITS < 64
+#if __GLASGOW_HASKELL__ >= 811 || WORD_SIZE_IN_BITS < 64
 shiftl_w64 (W64# w) (I# i) = W64# (w `uncheckedShiftL64#` i)
-
 #else
 shiftl_w64 (W64# w) (I# i) = W64# (w `uncheckedShiftL#` i)
 #endif
